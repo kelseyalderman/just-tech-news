@@ -7,7 +7,12 @@ const sequelize = require("../config/connection");
 
 // Create our User model
 // The Model class is what we create our own models from using the extend keyword so User inherits all of the functionality the Model class has
-class User extends Model {}
+class User extends Model {
+  // set up method to run on instance data (per user) to check password
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
 // Define table columns and configuration
 User.init(
