@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const res = require("express/lib/response");
-const { User } = require("../../models");
+const { User, Post } = require("../../models");
 
 // We do note use the word users in any routes because the prefix (/users) is added in routes/api/index.js (by implementing the routes to another router instance)
 
@@ -24,6 +24,12 @@ router.get("/:id", (req, res) => {
     where: {
       id: req.params.id,
     },
+    include: [
+      {
+        model: Post,
+        attributes: ["id", "title", "post_url", "created_at"],
+      },
+    ],
   })
     .then((dbUserData) => {
       if (!dbUserData) {
