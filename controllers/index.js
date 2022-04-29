@@ -3,11 +3,9 @@
 const router = require("express").Router();
 
 const apiRoutes = require("./api");
-
-router.use("/api", apiRoutes);
-
 const homeRoutes = require("./home-routes.js");
 
+router.use("/api", apiRoutes);
 router.use("/", homeRoutes);
 
 // If we make a request to any endpoint that doesn't exist, we'll receive a 404 error indicating we have requested an incorrect resource
